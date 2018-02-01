@@ -50,5 +50,22 @@ class Admin::EventsController < AdminController
   def event_params
     params.require(:event).permit(:name, :description, :friendly_id, :status, :category_id, :tickets_attributes => [:id, :name, :description, :price, :_destroy])
   end
+    def bulk_update
+      total = 0
+      Array(params[:ids]).each do |event_id|
+        event = Event.find(event_id)
+          if params[:commit] == I18n.t(:bulk_update)
+            event.status = params[:event_status]
+            if event.save
+              total += 1
+            end
+          elsif params[:commit] == I18n.t(:bulk_delete)
+            event.destroy
+            total += 1
+          end
+      end
 
+      flash[:alert] = "成功完成 #{total} 笔"
+      redirect_to admin_events_path
+    end
 end
