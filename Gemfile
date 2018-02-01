@@ -41,6 +41,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem "rails-i18n"
 gem "select2-rails"
+gem "nested_form_fields"
 
 group :development, :test do
   gem 'rspec-rails'

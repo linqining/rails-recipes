@@ -9,12 +9,15 @@ class Event < ApplicationRecord
   validates_inclusion_of :status, :in => STATUS
   def to_param
      self.friendly_id
-end
+   end
+belongs_to :category, :optional => true
+has_many :tickets, :dependent => :destroy, :inverse_of  => :event
+accepts_nested_attributes_for :tickets, :allow_destroy => true, :reject_if => :all_blank
 
    protected
 
    def generate_friendly_id
      self.friendly_id ||= SecureRandom.uuid
    end
-   belongs_to :category, :optional => true
+
 end
