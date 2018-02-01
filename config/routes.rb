@@ -11,7 +11,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root "events#index"
-    resources :events
     resources :users do
       resource :profile, :controller => "user_profiles"
     end
@@ -20,6 +19,9 @@ Rails.application.routes.draw do
       collection do
         post :bulk_update
       end
+      member do
+       post :reorder
+     end
     end
   end
 
