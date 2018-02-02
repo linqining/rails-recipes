@@ -1,5 +1,6 @@
+
 "zh-CN":
-#   hello: "亲～ %{name} 你好："
+  hello: "亲～ %{name}，您好"
   event_list: 活动列表
   bulk_update: 批次编辑
   bulk_delete: 批次删除
@@ -9,3 +10,19 @@
     status:
       pending: 报名尚未完成
       confirmed: 报名成功
+  user:
+     role:
+       admin: 超级管理员
+       editor: 活动管理员
+  notification:
+    subject:
+      confirmed_registration: "报名成功：%{name}"
+  devise:
+    failure:
+      user:
+        invalid: 用户不存在
+  devise:
+    sessions:
+        user:
+          signed_in: 您好
+# 特别注意编码格式问题，如果编码有问题直接报错，不行的部分可以手打，不要复制粘贴
