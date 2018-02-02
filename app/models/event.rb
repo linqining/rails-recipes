@@ -6,6 +6,9 @@ class Event < ApplicationRecord
     validates_format_of :friendly_id, :with => /\A[a-z0-9\-]+\z/
     STATUS = ["draft", "public", "private"]
     validates_inclusion_of :status, :in => STATUS
+
+    mount_uploader :logo, EventLogoUploader
+    
   def to_param
      self.friendly_id
    end
@@ -15,7 +18,7 @@ class Event < ApplicationRecord
     accepts_nested_attributes_for :tickets, :allow_destroy => true, :reject_if => :all_blank
    include RankedModel
    ranks :row_order
-   
+
    scope :only_public, -> { where( :status => "public" ) }
    scope :only_available, -> { where( :status => ["public", "private"] ) }
 
